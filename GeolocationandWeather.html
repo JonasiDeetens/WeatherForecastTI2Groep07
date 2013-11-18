@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title></title>
+	
+	<style>
+
+	</style> 
+<link href="./GeolocationandWeather.css" rel="Stylesheet">
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+<script src="./lib/jquery.js"></script>
+<script src="./lib/jquery.simpleWeather-2.3.min.js"></script>
+<script src="./GeolocationandWeather.js"></script>
+        
+<script>
+$(document).ready(function() {
+	doGetGeoLocation();
+});
+</script>
+</head>
+
+<body>
+	<h1>Your Weather Forecast</h1>
+	<div id="weather"></div>
+</body>
+
+</html>
