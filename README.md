@@ -148,3 +148,8 @@ function weather(woeid){
 ```
 
 [Klik hier voor een tabel met alle mogelijke opties van de API](http://simpleweatherjs.com)
+
+## Aanpassingen
+De aanpassingen zijn zeer simpel voor mensen met wat kennis van css.
+Je kunt alles vinden in het css bestand GeolocationandWeahter.css, die de div met het id Weather aanpast naar het gewenste
+uiterlijk.
