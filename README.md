@@ -1,6 +1,7 @@
 ![simpleweather.js logo](http://fc03.deviantart.net/fs70/i/2011/010/4/d/simple_weather_by_dijaysazon-d36unip.png)
 
 #### Simpel weerbericht voor op jouw site #####
+[Voorbeeldwebsite](https://rawgithub.com/JonasiDeetens/WeatherForecastTI2Groep07/master/GeolocationandWeather.html)
 
 ## Beschrijving
 GeolocationandWeather.js is een javascript bestandje die via geolocatie jouw plaats bepaald en daarna het weer 
