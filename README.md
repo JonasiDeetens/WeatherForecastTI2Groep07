@@ -17,9 +17,12 @@ en een simpele `<div>` aan te maken.
 
 ## Hoe implementeren ?
 Eerst voeg je een simpele link toe naar je css file.
+Ook voegen we een link toe naar de stylesheet pagina van de jqueri icons.
+Deze wordt dan gebruikt voor de layout van de buttons aan te passen (gebeurt automatisch in onze script).
 
 ```
 <link href="./GeolocationandWeather.css" rel="Stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 ```
 
 Daarna voegen we ook de noodzakelijke scripts toe.
@@ -109,44 +112,84 @@ Hierbij geven we ook de functie mee die de json output zal opvangen.
    s.setAttribute('src',url);
    document.getElementsByTagName('head')[0].appendChild(s);
  };
- ```
+```
 
 Volgende functie zal dan een callback krijgen als er een woeid gevonden is en die dan doorsturen naar de weather call
 om het weerbericht te verkrijgen.
+Hier binden we ook een click event aan de buttons die we hebben aangemaakt in onze `<div class="weather weer">` die we boven de `<div id="forecast">`
+kleven die zorgt voor buttons om van dag te verwisselen (huidig is alleen vandaag en morgen) en de dag van het weerbericht.
+De functie `doMorgen` die we hierin zullen binden is ook een call naar de simpleWeatherAPI maar dan met de parameters van tomorrow.
 
 ```
- function output(json){
+  function output(json){
    if(typeof(json.query.results.place.woeid) != 'undefined'){
-     woeid = json.query.results.place.woeid;
-   	 weather(woeid);
+       woeid = json.query.results.place.woeid;
+       $("<div class='weather weer'><input type='button' name='vandaag' id='vandaag' class='ui-icon ui-icon-carat-1-w' /><span class='weatherspan'>Vandaag</span><input type='button' name='morgen' id='morgen' class='ui-icon ui-icon-carat-1-e'/></div>").insertAfter(".weather");
+        
+       $("#morgen").bind("click", doMorgen);
+       $("#vandaag").bind("click", weather);
+       weather(woeid);
    }
  }
 ```
 
-Volgende functie zal dus zoals gezegd een ajax call versturen naar de simpleWeather API met de bepaalde WOEID.
+Volgende functies zullen dus zoals gezegd een ajax call versturen naar de simpleWeather API met de bepaalde WOEID.
 Deze zal dan bij succes een html string aanmaken waarin de temperatuur, foto en andere zaken over het huidige
 weerbericht worden weergegeven.
+Ook zal hierbij een button gehide worden die verwijsd naar morgen (als hij op morgen staat) of als hij op
+vandaag staat zal de button vandaag gehide worden.
 
 ```
-function weather(woeid){
+ function weather() {
      $.simpleWeather({
-  	 woeid: woeid ,
-     location: '' ,
-     unit: 'c',
-     success: function(weather) {
-      html = '<img src="'+weather.image+'"><h2>'+weather.temp+'&deg;'+weather.units.temp+'</h2>';
-      html += '<ul><li>'+weather.city+', '+weather.country+'</li>';
-      html += '<li class="currently">'+weather.currently+'</li>';
-      html += '<li>Humidity: '+weather.humidity+'</li></ul>';
-      
-      $("#weather").html(html);
-    },
-    error: function(error) {
-      $("#weather").html('<p>'+error+'</p>');
-    }
-  });
-}
+         woeid: woeid,
+         unit: 'c',
+         success: function (weather) {
+             html = '<img class="weatherImage" src="' + weather.image + '"><h2 class="weatherHeader">' + weather.temp + '&deg;' + weather.units.temp + '</h2>';
+             html += '<ul class="weatherItems"><li>' + weather.city + ', ' + weather.country + '</li>';
+             html += '<li class="currently">' + weather.currently + '</li>';
+             html += '<li>Humidity: ' + weather.humidity + '</li></ul>';
+
+             $(".weatherspan").html("Vandaag");
+             $("#forecast").html(html);
+             $("#vandaag").hide();
+             $("#morgen").show();
+             setCss();
+         },
+         error: function (error) {
+             $("#forecast").html('<p>' + error + '</p>');
+         }
+     });
+ }
+ 
+ function doMorgen() {
+     $.simpleWeather({
+         woeid: woeid,
+         unit: 'c',
+         success: function (weather) {
+             html = '<img class="weatherImage" src="' + weather.tomorrow.image + '"><h2 class="weatherHeader">' + weather.tomorrow.low + '&deg;' + weather.units.temp + '</h2>';
+             html += '<ul class="weatherItems"><li>' + weather.city + ', ' + weather.country + '</li>';
+             html += '<li class="currently">' + weather.tomorrow.forecast + '</li>';
+             html += '<li>Max: ' + weather.tomorrow.high + '&deg;' + weather.units.temp + '</li></ul>';
+
+             $(".weatherspan").html("Morgen");
+             $("#forecast").html(html);
+             $("#morgen").hide();
+             $("#vandaag").show();
+             setCss();
+         },
+         error: function (error) {
+             $("#forecast").html('<p>' + error + '</p>');
+         }
+     });
+ }
 ```
+
+Er is dan nog één functie aanwezig binnen deze functies en dat is de functie `setCss()`.
+Deze functie zorgt ervoor dat de grootte van de image en de tekst items zullen aangepast worden naarmate de grootte van 
+de `<div id="forecast">`.(Niet failproof)
+
+De beste optie hiervoor is dat de div een width heeft die dubbel zo groot is al zijn height.
 
 [Klik hier voor een tabel met alle mogelijke opties van de API](http://simpleweatherjs.com)
 
@@ -154,3 +197,22 @@ function weather(woeid){
 De aanpassingen zijn zeer simpel voor mensen met wat kennis van css.
 Je kunt alles vinden in het css bestand GeolocationandWeahter.css, die de div met het id Weather aanpast naar het gewenste
 uiterlijk.
+Je kunt ook je eigen css eraan toevoegen bij voorwaarde dat je de volgende tekst uit het meegeleverd css bestand verwijderdt.
+
+```
+.weather {
+  border: solid black;
+  border-radius: 5px;
+  width:500px;
+  height:150px;
+  position:absolute;
+  margin: -100px 0 0 -250px;
+  left:50%;
+  top:50%;
+  text-align: center;
+  background-color: white;
+  background-repeat: no-repeat;
+}
+```
+
+Veel succes en bij enige fouten gelieve mij deze te melden.
