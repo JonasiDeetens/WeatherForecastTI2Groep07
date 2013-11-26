@@ -7,45 +7,74 @@ h1 {
   margin: 0 0 8px;
   color: #fff;
   font-size: 50px;
-  font-weight: 150;
   text-align: center;
 }
 
-#weather {
+#vandaag, #morgen {
+    height: 20px;
+    border : 0px;
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+     border-radius:7px;
+     background-color: #0091c2;
+}
+
+#vandaag {
+    float: left;
+}
+
+#morgen {
+    float: right;
+}
+
+.weather {
   border: solid black;
   border-radius: 5px;
   width:500px;
-  height:200px;
+  height:150px;
   position:absolute;
+  margin: -100px 0 0 -250px;
   left:50%;
   top:50%;
-  margin:-100px 0 0 -250px;
   text-align: center;
   background-color: white;
   background-repeat: no-repeat;
 }
 
-#weather h2 {
-  float:right;
+.weather:hover + .weer {
+    display: inline-block;
+}
+
+.weer {
+  top: 46%;
+  height: 20px;
+  background-color: #0091c2;
+  display: none;
+}
+
+ .weer:hover {
+  display: inline-block;
+}
+
+.weather h2 {
+  float: right;
   margin: 0 0 8px;
   font-size: 100px;
-  font-weight: 150;
   text-align: center;
 }
 
-#weather ul {
+.weather ul {
   margin: 0;
   padding: 0;
 }
 
-#weather li {
-  float: left;
+.weather li {
+  margin-left: 3%;
+  margin-right: 3%;
   display: inline-block;
-  padding: 2px 2px 2px 2px;
-  border-radius: 5px;
   text-transform: uppercase;
 }
 
-#weather .currently {
-  margin: 0px 80px;
+.weather .currently {
+  margin: 0px 25px;
 }
