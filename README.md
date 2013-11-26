@@ -38,7 +38,7 @@ Als we deze zaken hebben toegevoegd is het alleen nog maar noodzakelijk om een s
 het weerbericht wordt teruggegeven.
 
 ```
-<div id="weather"></div>
+<div class="weather" id="forecast"></div>
 ```
 
 ## Hoe werkt dit ?
