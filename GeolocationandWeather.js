@@ -4,8 +4,7 @@ var woeid;
 
 function doGetGeoLocation(){
     if(navigator.geolocation)
-    	
-    	geocoder = new google.maps.Geocoder();
+        geocoder = new google.maps.Geocoder();
         navigator.geolocation.getCurrentPosition(handleGetCurrentPosition);
 }
 
@@ -49,25 +48,86 @@ function errorFunction(){
  // callback in case there is a place found
  function output(json){
    if(typeof(json.query.results.place.woeid) != 'undefined'){
-     woeid = json.query.results.place.woeid;
-   	 weather(woeid);
+       woeid = json.query.results.place.woeid;
+       $("<div class='weather weer'><input type='button' name='vandaag' id='vandaag' class='ui-icon ui-icon-carat-1-w' /><span class='weatherspan'>Vandaag</span><input type='button' name='morgen' id='morgen' class='ui-icon ui-icon-carat-1-e'/></div>").insertAfter(".weather");
+        
+       $("#morgen").bind("click", doMorgen);
+       $("#vandaag").bind("click", weather);
+       weather(woeid);
    }
  }
 
-function weather(woeid){
+ function weather() {
      $.simpleWeather({
-  	 woeid: woeid ,
-     unit: 'c',
-     success: function(weather) {
-      html = '<img src="'+weather.image+'"><h2>'+weather.temp+'&deg;'+weather.units.temp+'</h2>';
-      html += '<ul><li>'+weather.city+', '+weather.country+'</li>';
-      html += '<li class="currently">'+weather.currently+'</li>';
-      html += '<li>Humidity: '+weather.humidity+'</li></ul>';
-      
-      $("#weather").html(html);
-    },
-    error: function(error) {
-      $("#weather").html('<p>'+error+'</p>');
-    }
-  });
-}
+         woeid: woeid,
+         unit: 'c',
+         success: function (weather) {
+             html = '<img class="weatherImage" src="' + weather.image + '"><h2 class="weatherHeader">' + weather.temp + '&deg;' + weather.units.temp + '</h2>';
+             html += '<ul class="weatherItems"><li>' + weather.city + ', ' + weather.country + '</li>';
+             html += '<li class="currently">' + weather.currently + '</li>';
+             html += '<li>Humidity: ' + weather.humidity + '</li></ul>';
+
+             $(".weatherspan").html("Vandaag");
+             $("#forecast").html(html);
+             $("#vandaag").hide();
+             $("#morgen").show();
+             setCss();
+         },
+         error: function (error) {
+             $("#forecast").html('<p>' + error + '</p>');
+         }
+     });
+ }
+
+ function doMorgen() {
+     $.simpleWeather({
+         woeid: woeid,
+         unit: 'c',
+         success: function (weather) {
+             html = '<img class="weatherImage" src="' + weather.tomorrow.image + '"><h2 class="weatherHeader">' + weather.tomorrow.low + '&deg;' + weather.units.temp + '</h2>';
+             html += '<ul class="weatherItems"><li>' + weather.city + ', ' + weather.country + '</li>';
+             html += '<li class="currently">' + weather.tomorrow.forecast + '</li>';
+             html += '<li>Max: ' + weather.tomorrow.high + '&deg;' + weather.units.temp + '</li></ul>';
+
+             $(".weatherspan").html("Morgen");
+             $("#forecast").html(html);
+             $("#morgen").hide();
+             $("#vandaag").show();
+             setCss();
+         },
+         error: function (error) {
+             $("#forecast").html('<p>' + error + '</p>');
+         }
+     });
+ }
+
+ function setCss() {
+     var height = $("#forecast").css("height");
+     var width = $("#forecast").css("width");
+     var hoogte = "";
+     var breedte = "";
+     if (height.length == 5) {
+         hoogte = height.substr(0, 3);
+     }
+     else {
+         hoogte = height.substr(0, 2);
+     }
+     if (width.length == 5) {
+         breedte = width.substr(0, 3);
+     }
+     else {
+         breedte = width.substr(0, 2);
+     }
+
+
+     console.log(hoogte);
+     console.log(breedte);
+     $(".weatherImage").css("width", breedte / 2.5 + "px");
+     $(".weatherImage").css("margin-left", "-10%");
+     $(".weatherImage").css("height", hoogte /1.5+"px");
+     $(".weatherHeader").css("font-size", hoogte/2+"px");
+     $(".weatherItems li").css("font-size", hoogte/12+"px");
+
+ }
+
+
