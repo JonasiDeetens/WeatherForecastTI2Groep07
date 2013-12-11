@@ -120,7 +120,7 @@ function errorFunction(){
      }
 
 
-     $(".weatherImage").css("width", breedte / 3 + "px");
+     $(".weatherImage").css("width", breedte / 4 + "px");
      $(".weatherImage").css("margin-left", "-10%");
      $(".weatherImage").css("height", hoogte /1.5+"px");
      $(".weatherHeader").css("font-size", hoogte/2+"px");
