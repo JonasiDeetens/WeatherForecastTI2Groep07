@@ -201,7 +201,7 @@ Je kunt ook je eigen css eraan toevoegen bij voorwaarde dat je de volgende tekst
 
 ```
 .weather {
-  border: solid black;
+  border: solid #B0B0B0;
   border-radius: 5px;
   width:500px;
   height:150px;
@@ -210,7 +210,7 @@ Je kunt ook je eigen css eraan toevoegen bij voorwaarde dat je de volgende tekst
   left:50%;
   top:50%;
   text-align: center;
-  background-color: white;
+  background-color: #fffacd; /*LemonChiffon*/
   background-repeat: no-repeat;
 }
 ```
