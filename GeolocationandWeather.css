@@ -1,6 +1,7 @@
 body {
   font: 13px 'Open Sans', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   background: #0091c2;
+  color: #484848;
 }
 
 h1 {
@@ -10,13 +11,18 @@ h1 {
   text-align: center;
 }
 
+h2 {
+    font-weight:normal;
+    color:Gray;
+}
+
 #vandaag, #morgen {
     height: 20px;
     border : 0px;
     -moz-border-radius:7px;
     -webkit-border-radius:7px;
      border-radius:7px;
-     background-color: #0091c2;
+     background-color: #fffacd;
 }
 
 #vandaag {
@@ -28,7 +34,7 @@ h1 {
 }
 
 .weather {
-  border: solid black;
+  border: solid #B0B0B0;
   border-radius: 5px;
   width:500px;
   height:150px;
@@ -37,22 +43,18 @@ h1 {
   left:50%;
   top:50%;
   text-align: center;
-  background-color: white;
+  background-color: #fffacd; /*LemonChiffon*/
   background-repeat: no-repeat;
 }
 
-.weather:hover + .weer {
-    display: inline-block;
-}
-
 .weer {
-  top: 48%;
+  top: 47%;
   height: 20px;
-  background-color: #0091c2;
+  background-color: #fffacd;
   display: none;
 }
 
- .weer:hover {
+ .weer {
   display: inline-block;
 }
 
