@@ -99,6 +99,7 @@ function errorFunction(){
              $("#forecast").html('<p>' + error + '</p>');
          }
      });
+
  }
 
  function setCss() {
@@ -119,11 +120,10 @@ function errorFunction(){
          breedte = width.substr(0, 2);
      }
 
-
-     $(".weatherImage").css("width", breedte / 2.5 + "px");
+     $(".weatherImage").css("width", breedte / 3 + "px");
      $(".weatherImage").css("margin-left", "-10%");
-     $(".weatherImage").css("height", hoogte /1.5+"px");
-     $(".weatherHeader").css("font-size", hoogte/10+"px");
+     $(".weatherImage").css("height", hoogte /1.5 + "px");
+     $(".weatherHeader").css("font-size", hoogte/2+"px");
      $(".weatherItems li").css("font-size", hoogte/12+"px");
 
  }
