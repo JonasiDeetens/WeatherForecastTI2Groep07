@@ -44,19 +44,15 @@ h2 {
 }
 
 .weer {
-  top: 47%;
+  top: 47.5%;
   height: 20px;
   background-color: #fffacd;
-  display: none;
-}
-
- .weer {
   display: inline-block;
 }
 
 .weather h2 {
   float: right;
-  margin: 0 0 0 10px;
+  margin: 0 10 0 0;
   font-size: 100px;
   text-align: center;
 }
