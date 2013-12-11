@@ -52,7 +52,7 @@ h2 {
 
 .weather h2 {
   float: right;
-  margin: 0 10 0 0;
+  margin: 0 10px 0 0;
   font-size: 100px;
   text-align: center;
 }
