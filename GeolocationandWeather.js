@@ -123,7 +123,7 @@ function errorFunction(){
      $(".weatherImage").css("width", breedte / 2.5 + "px");
      $(".weatherImage").css("margin-left", "-10%");
      $(".weatherImage").css("height", hoogte /1.5+"px");
-     $(".weatherHeader").css("font-size", hoogte/2+"px");
+     $(".weatherHeader").css("font-size", hoogte/10+"px");
      $(".weatherItems li").css("font-size", hoogte/12+"px");
 
  }
