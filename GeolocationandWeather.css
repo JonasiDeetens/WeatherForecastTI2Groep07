@@ -1,7 +1,5 @@
 body {
-  font: 13px 'Open Sans', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   background: #0091c2;
-  color: #484848;
 }
 
 h1 {
@@ -19,8 +17,6 @@ h2 {
 #vandaag, #morgen {
     height: 20px;
     border : 0px;
-    -moz-border-radius:7px;
-    -webkit-border-radius:7px;
      border-radius:7px;
      background-color: #fffacd;
 }
@@ -43,7 +39,7 @@ h2 {
   left:50%;
   top:50%;
   text-align: center;
-  background-color: #fffacd; /*LemonChiffon*/
+  background-color: #fffacd;
   background-repeat: no-repeat;
 }
 
